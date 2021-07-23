@@ -16,23 +16,9 @@
     "
   >
     <form action="/users/login" method="POST">
+      <input type="hidden" name="_csrf" value="<%=_token%>">
       <h1 class="mb-3">Login</h1>
-      <% if(locals.errors){ %>
-      <div
-        class="errors"
-        style="
-          width: 100%;
-          padding-left: 4px;
-          background-color: rgb(253 5 90);
-          color: rgb(160 0 0);
-          outline: rgb(237 20 61);
-          border-radius: 5px;
-          margin-bottom: 3px;
-        "
-      >
-        <%=errors%>
-      </div>
-      <%}%>
+      <%- include('../flashSession/flash.ejs',{errors:locals.errors})%>
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label"
           >Username or Email</label

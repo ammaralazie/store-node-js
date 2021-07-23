@@ -10,6 +10,64 @@ passport.serializeUser(function(user, done) {
     done(null, user);
   });
 
+
+passport.use(
+  "local.signup",
+  new localStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true,
+    },
+    (req, username, password, done) => {
+      if (req.body.password != req.body.confirm_password) {
+        return done(null, false, req.flash("error", "password do not match"));
+      } //end of if
+      else {
+        User.findOne({ email: username }, (err, user) => {
+          if (err) {
+            console.log(err)
+          } else if (user) {
+            return done(null, false, req.flash("errorUserFind", "email is exists"))
+          } else if (!user) {
+            User.findOne({ username: req.body.username }, (err, user) => {
+              if (err) {
+                console.log(err)
+              } else if (user) {
+                return done(
+                  null,
+                  false,
+                  req.flash("errorUserFind", "username is exists")
+                )
+              }
+              if (!user) {
+                const newUser = new User()
+                newUser.username = req.body.username
+                newUser.email = username
+                newUser.password = newUser.hashPassword(password)
+                // newUser.avater='profile.png'
+                // newUser.created_at=new Date()
+                newUser.save((err, user) => {
+                  if (!err) {
+                    return done(
+                      null,
+                      user,
+                      req.flash("userSuccess", "welocome mr"+user.username+"in your website")
+                    )
+                  } else {
+                    console.log(err)
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    }
+  )
+)
+//end  of local.signup
+
 passport.use(
     "local.login",
     new localStrategy(

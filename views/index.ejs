@@ -1,27 +1,43 @@
 <%-include('./base/layout.ejs',{prod:'Products'})%>
 
-<div class="container">
-<!-- wepper -->
-<div class="wepper">
-
-  <%obj.forEach((obj)=>{%>
-  <!-- card -->
-  <div class="card" style="width: 18rem;">
-    <img src="https://via.placeholder.com/150" class="card-img-top" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title"><%=obj.title%></h5>
-      <p class="card-text"><%= obj.discription.information%>></p>
-      <div class="price-btn">
-        <p><%=obj.price%> $</p>
-        <a href="#" class="btn btn-success">Buy</a>
+<div class="container" style="position: relative">
+  <div style="width: 30%; transform: translate(242%, 10px)">
+    <form class="d-flex" style="margin-bottom: 20px">
+      <input
+        class="form-control me-2"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+      />
+      <input type="hidden" name="" value="<%=locals.user.username%>">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+  <%-include('./flashSession/flash.ejs',{userSuccess:locals.userSuccess})%>
+  <%-include('./flashSession/flash.ejs',{success:locals.success})%>
+  <!-- wepper -->
+  <div class="wepper">
+    <%obj.forEach((obj)=>{%>
+    <!-- card -->
+    <div class="card" style="width: 18rem">
+      <img
+        src="https://via.placeholder.com/150"
+        class="card-img-top"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title"><%=obj.title%></h5>
+        <p class="card-text"><%= obj.discription.information%>></p>
+        <div class="price-btn">
+          <p><%=obj.price%> $</p>
+          <a href="#" class="btn btn-success">Buy</a>
+        </div>
       </div>
     </div>
+    <!-- card -->
+    <%})%>
   </div>
-  <!-- card -->
-  <%})%>
+  <!-- /wepper -->
 </div>
-<!-- /wepper -->
-</div>
-
 
 <%-include('./base/footer.ejs')%>

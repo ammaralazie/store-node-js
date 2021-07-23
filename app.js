@@ -32,9 +32,14 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
+
 //import database
 const db=require('./database/db')
-
+//any request must pass from here to give him locals.users
+app.get('*',(req,res,next)=>{
+  res.locals.user=req.user || null
+  next()
+})
 var indexRouter = require('./routes/index');
 // var usersRouter = require('./routes/users');
 const user_router=require('./routes/user-router')
@@ -50,10 +55,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'node_modules')));
 
+//import router for user-router
 app.use('/', indexRouter);
 app.use('/users',user_router)
-//import router for user-router
-
 
 
 // catch 404 and forward to error handler
@@ -72,10 +76,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-//this function to check every requset is auth or no
-app.get('*',(req,res,next)=>{
-  res.locals.user=req.user || null
-  next()
-})
+
 
 module.exports = app;

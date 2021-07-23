@@ -15,24 +15,9 @@
     "
   >
     <form action="/users/signup" method="POST">
+      <input type="hidden" name="_csrf" value="<%=_token%>">
       <h1 class="mb-3">SignUp</h1>
-      <% if(locals.errors){ %> <%errors.forEach((err)=>{%>
-      <div
-        class="errors"
-        style="
-          width: 100%;
-          padding-left: 4px;
-          background-color: rgb(253 5 90);
-          color: rgb(160 0 0);
-          outline: rgb(237 20 61);
-          border-radius: 5px;
-          margin-bottom: 3px;
-        "
-      >
-        <%=err.msg%>
-        
-      </div>
-      <%})%> <%}%>
+      <%-include('../flashSession/flash.ejs',{errorsSignup:locals.errorsSignup})%>
       <div class="mb-3">
         <label for="username" class="form-label">Username</label>
         <input

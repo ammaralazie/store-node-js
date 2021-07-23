@@ -9,7 +9,9 @@ router.get('/', function(req, res, next) {
       console.log(err)
     }else{
       context={
-        obj:data
+        obj:data,
+        success:req.flash('success'),
+        userSuccess:req.flash('userSuccess')
       }//end of context
       res.render('index',context);
     }

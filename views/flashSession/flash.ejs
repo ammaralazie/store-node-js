@@ -1,0 +1,66 @@
+<!-- flash error login -->
+<% if(locals.errorsLogin){ %>
+<div
+  style="
+    width: 100%;
+    padding-left: 4px;
+    background-color: rgb(253 5 90);
+    color: rgb(160 0 0);
+    border-radius: 5px;
+    margin-bottom: 3px;
+  "
+>
+  <%=errors%>
+</div>
+<%}%>
+
+<!-- flash success login -->
+<% if(locals.success){ %>
+<div
+  class="errors"
+  style="
+    width: 100%;
+    padding-left: 4px;
+    background-color: rgb(52 154 14);
+    color: rgb(228 214 214);
+    border-radius: 5px;
+    margin-bottom: 3px;
+  "
+>
+  <%=success%>
+</div>
+<%}%>
+
+<!-- flash error signup -->
+<% if(locals.errorsSignup){ %> <%errorsSignup.forEach((err)=>{%>
+<div
+  class="errors"
+  style="
+    width: 100%;
+    padding-left: 4px;
+    background-color: rgb(253 5 90);
+    color: rgb(160 0 0);
+    border-radius: 5px;
+    margin-bottom: 3px;
+  "
+>
+  <%=err.msg%>
+</div>
+<%})%> <%}%>
+
+
+<!-- flash success signup -->
+<% if(locals.userSuccess){ %>
+    <div
+      style="
+        width: 100%;
+        padding-left: 4px;
+        background-color: rgb(52 154 14);
+        color: rgb(228 214 214);
+        border-radius: 5px;
+        margin-bottom: 3px;
+      "
+    >
+      <%=success%>
+    </div>
+    <%}%>
