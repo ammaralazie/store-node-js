@@ -1,0 +1,27 @@
+<%-include('./base/layout.ejs',{prod:'Products'})%>
+
+<div class="container">
+<!-- wepper -->
+<div class="wepper">
+
+  <%obj.forEach((obj)=>{%>
+  <!-- card -->
+  <div class="card" style="width: 18rem;">
+    <img src="https://via.placeholder.com/150" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title"><%=obj.title%></h5>
+      <p class="card-text"><%= obj.discription.information%>></p>
+      <div class="price-btn">
+        <p><%=obj.price%> $</p>
+        <a href="#" class="btn btn-success">Buy</a>
+      </div>
+    </div>
+  </div>
+  <!-- card -->
+  <%})%>
+</div>
+<!-- /wepper -->
+</div>
+
+
+<%-include('./base/footer.ejs')%>

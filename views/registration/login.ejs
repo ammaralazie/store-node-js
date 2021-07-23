@@ -1,0 +1,65 @@
+<%-include('../base/layout.ejs',{prod:'Login'})%>
+
+<div
+  class="container"
+  style="width: 100%; display: flex; justify-content: center"
+>
+  <div
+    class="weepper"
+    style="
+      width: 60%;
+      box-shadow: 1px 2px 1px #b3a9a9;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 15px;
+      border: 1px solid rgb(0 0 0 / 40%);
+    "
+  >
+    <form action="/users/login" method="POST">
+      <h1 class="mb-3">Login</h1>
+      <% if(locals.errors){ %>
+      <div
+        class="errors"
+        style="
+          width: 100%;
+          padding-left: 4px;
+          background-color: rgb(253 5 90);
+          color: rgb(160 0 0);
+          outline: rgb(237 20 61);
+          border-radius: 5px;
+          margin-bottom: 3px;
+        "
+      >
+        <%=errors%>
+      </div>
+      <%}%>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label"
+          >Username or Email</label
+        >
+        <input
+          type="text"
+          name="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+        <div id="emailHelp" class="form-text">
+          We'll never share your email with anyone else.
+        </div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">login</button>
+    </form>
+  </div>
+</div>
+
+<%-include('../base/footer.ejs')%>
